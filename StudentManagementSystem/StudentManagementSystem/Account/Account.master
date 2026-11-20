@@ -1,0 +1,95 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Account.master.cs" Inherits="StudentManagementSystem.Account.AccountMaster" %>
+<!DOCTYPE html>
+<html lang="en" data-theme="<%= ThemeAttr %>" data-theme-pref="<%= ThemePref %>" data-font="<%= FontAttr %>" data-motion="<%= MotionAttr %>" data-contrast="<%= ContrastAttr %>" data-zoom="<%= ZoomAttr %>" data-build="<%= BuildStamp %>">
+<head runat="server">
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta name="robots" content="noindex"/>
+    <meta name="theme-color" content="<%= ThemeAttr == "dark" ? "#0E0E10" : ThemeAttr == "eye" ? "#EFE8D2" : "#F4F3EF" %>"/>
+    <link rel="icon" href="/Content/icons/favicon.svg" type="image/svg+xml"/>
+    <script>(function(){try{var r=document.documentElement;function c(n){var m=document.cookie.match(new RegExp("(?:^|; )"+n+"=([^;]*)"));return m?decodeURIComponent(m[1]):"";}var t=c("sms_theme");if(!t){try{var s=JSON.parse(localStorage.getItem("sms.appearance")||"{}");t=s.theme||"";}catch(e){}}if(t==="light"||t==="dark"||t==="eye"){r.setAttribute("data-theme",t);r.setAttribute("data-theme-pref",t);}var z=c("sms_zoom");if(z){r.setAttribute("data-zoom",z);r.style.setProperty("--app-zoom",String(parseInt(z,10)/100));}var f=c("sms_font");if(f){r.setAttribute("data-font",f);r.style.setProperty("--text-scale",String(parseInt(f,10)/100));}var sb=c("sms_sidebar");if(sb==="1"){r.classList.add("sms-sidebar-collapsed");}}catch(e){}})();</script>
+    <script>(function(){try{var r=document.documentElement;function ck(n){var m=document.cookie.match(new RegExp("(?:^|; )"+n+"=([^;]*)"));return m?decodeURIComponent(m[1]):"";}var raw=ck("sms_prefs");if(!raw){try{raw=localStorage.getItem("sms_prefs")||"";}catch(e){}}var p={};try{p=JSON.parse(raw||"{}")||{};}catch(e){p={};}if(p.theme&&/^(light|dark|eye|system)$/.test(p.theme)){var t=p.theme==="system"?(window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light"):p.theme;r.setAttribute("data-theme",t);r.setAttribute("data-theme-pref",p.theme);}var z=parseInt(p.zoom,10);if(z>=80&&z<=150){r.setAttribute("data-zoom",String(z));r.style.setProperty("--app-zoom",String(z/100));}var f=parseInt(p.textScale,10);if(f>=85&&f<=140){r.setAttribute("data-font",String(f));r.style.setProperty("--text-scale",String(f/100));}if(p.motion==="reduced"||p.motion==="full"){r.setAttribute("data-motion",p.motion);}if(p.density==="compact"||p.density==="comfortable"){r.setAttribute("data-density",p.density);}if(p.highContrast){r.setAttribute("data-contrast","high");}if(p.sidebarCollapsed){r.classList.add("sms-sidebar-collapsed");}}catch(e){}})();</script>
+    <title><asp:ContentPlaceHolder ID="TitleContent" runat="server">Student Management System</asp:ContentPlaceHolder></title>
+    <link rel="preload" as="font" type="font/woff2" href="/Content/fonts/inter-latin-standard-normal.woff2" crossorigin/>
+    <link rel="preload" as="font" type="font/woff2" href="/Content/fonts/jetbrains-mono-latin-wght-normal.woff2" crossorigin/>
+    <link href="/Content/vendor/bootstrap/bootstrap.min.css" rel="stylesheet"/>
+    <link href="/Content/css/fonts.css" rel="stylesheet"/>
+    <link href="/Content/css/tokens.css" rel="stylesheet"/>
+    <link href="/Content/css/base.css" rel="stylesheet"/>
+    <link href="/Content/css/components.css" rel="stylesheet"/>
+    <link href="/Content/css/layout.css" rel="stylesheet"/>
+    <link href="/Content/css/bento.css" rel="stylesheet"/>
+    <link href="/Content/css/pages/auth.css" rel="stylesheet"/>
+    <link href="/Content/css/print.css" rel="stylesheet" media="print"/>
+    <script src="/Content/js/design.js" defer></script>
+    <asp:ContentPlaceHolder ID="HeadContent" runat="server"/>
+</head>
+<body class="auth-body">
+<div class="auth auth-shell <%= AuthShellClass %>">
+    <section class="auth__brand auth-hero" aria-label="Welcome">
+        <a class="auth-brand" href="/Account/Login.aspx" aria-label="Student Management System">
+            <span class="brand-mark" aria-hidden="true">S</span>
+            <span class="auth-brand-copy">
+                <span class="auth-brand-name">SMS</span>
+                <span class="auth-brand-sub">Campus</span>
+            </span>
+        </a>
+
+        <div class="auth-hero-copy">
+            <h2>Attendance. Results. Fees. One system.</h2>
+            <p>One campus workspace for records, payments, support and daily administration.</p>
+            <div class="auth-roles">
+                <div class="auth-role"><span>Admins</span><p>Manage people, academics, finance and system settings.</p></div>
+                <div class="auth-role"><span>Faculty</span><p>Take attendance, enter marks and answer student concerns.</p></div>
+                <div class="auth-role"><span>Students</span><p>Check attendance, results, fees and notifications.</p></div>
+            </div>
+        </div>
+    </section>
+
+    <div class="auth__main auth-side <%= AuthSideClass %>">
+        <div class="auth__appearance auth-appearance">
+            <div class="sms-themeseg" role="group" aria-label="Theme">
+                <button class="sms-themeseg-btn<%= ThemePref == "light" ? " active" : "" %>" type="button" data-sms-theme="light" aria-pressed="<%= ThemePref == "light" ? "true" : "false" %>" title="Light theme">Light</button>
+                <button class="sms-themeseg-btn<%= ThemePref == "dark" ? " active" : "" %>" type="button" data-sms-theme="dark" aria-pressed="<%= ThemePref == "dark" ? "true" : "false" %>" title="Dark theme">Dark</button>
+                <button class="sms-themeseg-btn<%= ThemePref == "eye" ? " active" : "" %>" type="button" data-sms-theme="eye" aria-pressed="<%= ThemePref == "eye" ? "true" : "false" %>" title="Eye protection theme">Eye</button>
+            </div>
+            <div class="sms-fontctl" role="group" aria-label="Text size">
+                <button class="sms-iconbtn" id="smsFontDown" type="button" aria-label="Decrease text size" title="Decrease text size">A&minus;</button>
+                <button class="sms-iconbtn sms-font-reset" id="smsFontReset" type="button" aria-label="Reset text size" title="Reset text size">A</button>
+                <button class="sms-iconbtn" id="smsFontUp" type="button" aria-label="Increase text size" title="Increase text size">A+</button>
+            </div>
+            <div class="sms-zoomctl" role="group" aria-label="Interface zoom">
+                <button class="sms-iconbtn" id="smsZoomDown" type="button" aria-label="Zoom out" title="Zoom out">&minus;</button>
+                <button class="zoom-value" id="smsZoomReset" type="button" aria-label="Reset interface zoom" title="Reset interface zoom">100%</button>
+                <button class="sms-iconbtn" id="smsZoomUp" type="button" aria-label="Zoom in" title="Zoom in">+</button>
+            </div>
+            <button class="sms-prefbtn" type="button" data-pref-action="motion-toggle" aria-pressed="false" title="Toggle reduced motion">Motion: full</button>
+            <button class="sms-prefbtn" type="button" data-pref-action="density-toggle" aria-pressed="false" title="Toggle compact spacing">Density: comfortable</button>
+        </div>
+
+        <div class="auth__card auth-card <%= AuthCardClass %>">
+            <form id="authForm" runat="server">
+            <span id="litYear" runat="server" hidden></span>
+                <asp:ContentPlaceHolder ID="MainContent" runat="server"/>
+            </form>
+        </div>
+        <p class="auth__footer auth-footnote">
+            Made with <span class="footer-heart" aria-hidden="true">&hearts;</span> by <strong>QuantumGlitch404</strong>
+        </p>
+    </div>
+</div>
+
+<script src="/Content/vendor/jquery/jquery-3.7.1.min.js"></script>
+<script src="/Content/vendor/bootstrap/bootstrap.bundle.min.js"></script>
+    <script src="/Content/js/appearance.js"></script>
+    <script src="/Content/js/prefs.js"></script>
+<script src="/Content/js/validation.js"></script>
+<script src="/Content/js/auth.js"></script>
+<asp:ContentPlaceHolder ID="ScriptContent" runat="server"/>
+</body>
+</html>
+
+
+
+
+

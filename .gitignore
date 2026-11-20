@@ -1,0 +1,33 @@
+﻿# Build outputs
+bin/
+obj/
+packages/
+.vs/
+dist/
+build/
+*.user
+*.suo
+
+# Database and data
+App_Data/
+*.mdf
+*.ldf
+*.bak
+*.log
+
+# Node and tools
+node_modules/
+models/*.gguf
+tools/**/*.exe
+secrets*
+*.pfx
+.env
+
+# IDE
+*.swp
+*.swo
+*~
+
+# OS
+Thumbs.db
+.DS_Store

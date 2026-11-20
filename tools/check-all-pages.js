@@ -1,0 +1,12 @@
+﻿const { chromium } = require('playwright-core');
+const groups={
+ admin:{email:'admin@sms.edu',pass:'Admin@123',pages:['/Admin/Index.aspx','/Admin/Users.aspx','/Admin/Academics.aspx','/Admin/Sessions.aspx','/Admin/Attendance.aspx','/Admin/Exams.aspx','/Admin/ImportExport.aspx','/Admin/Fees.aspx','/Admin/Payments.aspx','/Admin/Notifications.aspx','/Admin/Announcements.aspx','/Admin/Complaints.aspx','/Admin/Audit.aspx','/Admin/Settings.aspx','/Notifications/Index.aspx','/Chatbot/Index.aspx','/Account/Settings.aspx']},
+ faculty:{email:'faculty@sms.edu',pass:'Faculty@123',pages:['/Faculty/Index.aspx','/Faculty/Attendance.aspx','/Faculty/Marks.aspx','/Faculty/Complaints.aspx','/Faculty/Profile.aspx']},
+ student:{email:'student@sms.edu',pass:'Student@123',pages:['/Student/Index.aspx','/Student/Attendance.aspx','/Student/Results.aspx','/Student/Fees.aspx','/Student/Complaint.aspx','/Student/Notifications.aspx','/Student/Profile.aspx','/Student/PayCheckout.aspx']}
+};
+async function login(p,g){await p.goto('http://localhost:8080/Account/Login.aspx',{waitUntil:'networkidle'});await p.locator('input[type=email]').fill(g.email);await p.locator('input[type=password]').fill(g.pass);await Promise.all([p.waitForNavigation({waitUntil:'networkidle'}),p.locator('input[type=submit]').click()]);}
+(async()=>{const b=await chromium.launch({channel:'chrome',headless:true});
+for(const [role,g] of Object.entries(groups)){for(const w of [2460,390]){const ctx=await b.newContext({viewport:{width:w,height:1000}});const p=await ctx.newPage();const errs=[];p.on('pageerror',e=>errs.push('PAGE '+e.message));p.on('console',m=>{if(m.type()==='error')errs.push('CON '+m.text().slice(0,100))});await login(p,g);
+for(const u of g.pages){errs.length=0; let r; try{r=await p.goto('http://localhost:8080'+u,{waitUntil:'networkidle',timeout:30000});}catch(e){console.log(role,w,u,'NAVFAIL',e.message.slice(0,80));continue;} const m=await p.evaluate(()=>({docW:document.documentElement.scrollWidth,cw:document.documentElement.clientWidth,h1:document.querySelector('h1')?.textContent.trim().slice(0,40),page:!!document.querySelector('.page'),clipped:[...document.querySelectorAll('table,.card,.panel,.kpi,.toolbar')].filter(e=>e.scrollWidth>e.clientWidth+2).length})); const bad=m.docW>m.cw||r.status()>=400||errs.length||m.clipped>0; if(bad)console.log(role,w,u,r.status(),JSON.stringify(m),errs.join(' | '));}
+await ctx.close();}}
+await b.close();})();

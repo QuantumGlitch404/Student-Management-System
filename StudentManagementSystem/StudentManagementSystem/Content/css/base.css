@@ -1,0 +1,221 @@
+﻿/* Swiss Modernism 2.0 base: one grotesque, mono data, rules instead of boxes. */
+*,
+*::before,
+*::after { box-sizing: border-box; }
+
+html {
+  min-height: 100%;
+  font-size: calc(16px * var(--app-zoom, 1) * var(--text-scale, 1));
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  font-optical-sizing: auto;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  min-height: 100%;
+  margin: 0;
+  background: var(--canvas);
+  color: var(--ink);
+  font-family: var(--font-ui);
+  font-size: calc(.95rem * var(--text-scale, 1));
+  font-weight: 400;
+  line-height: 1.5;
+  font-optical-sizing: auto;
+  font-synthesis: none;
+  font-variant-numeric: tabular-nums;
+  text-rendering: optimizeLegibility;
+  transition: background-color 200ms ease, color 200ms ease;
+}
+
+body.sms-body { overflow: hidden; }
+body.auth-body { min-height: 100dvh; overflow-x: hidden; overflow-y: auto; }
+#bg-orbs { display: none !important; }
+.bi { display: none !important; }
+
+a {
+  color: var(--accent);
+  text-decoration: none;
+  text-underline-offset: 3px;
+}
+a:hover { color: var(--accent); text-decoration: underline; text-decoration-thickness: 1px; }
+
+::selection { background: var(--accent-tint); color: var(--ink); }
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 0 0 .5em;
+  color: var(--ink);
+  font-family: var(--font-ui);
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: -.022em;
+  text-transform: none;
+}
+h1 {
+  font-size: clamp(2rem, 3.2vw, 2.75rem);
+  line-height: 1.04;
+  letter-spacing: -.022em;
+}
+h2 { font-size: 1.5rem; letter-spacing: -.018em; }
+h3 { font-size: 1.25rem; letter-spacing: -.014em; }
+h4 { font-size: 1.0625rem; letter-spacing: -.01em; }
+h5 { font-size: 1rem; letter-spacing: -.006em; }
+h6 {
+  font-family: var(--font-mono);
+  font-size: max(.75rem, 12px);
+  font-weight: 500;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+}
+
+p { margin: 0 0 1em; }
+p:last-child { margin-bottom: 0; }
+strong, b { font-weight: 600; }
+
+small, .small { font-size: max(.8125rem, 12px); letter-spacing: .005em; }
+.text-muted, .muted { color: var(--ink-3) !important; }
+.text-danger { color: var(--danger) !important; }
+.text-success { color: var(--success) !important; }
+.text-warning { color: var(--warning) !important; }
+.text-center { text-align: left !important; }
+.text-end { text-align: right !important; }
+.text-decoration-none { text-decoration: none !important; }
+.fw-semibold { font-weight: 600 !important; }
+.fw-bold { font-weight: 700 !important; }
+.mb-0 { margin-bottom: 0 !important; }
+.mt-1 { margin-top: .25rem !important; }
+.mt-2 { margin-top: .5rem !important; }
+.mt-3 { margin-top: 1rem !important; }
+.mb-2 { margin-bottom: .5rem !important; }
+.mb-3 { margin-bottom: 1rem !important; }
+.p-2 { padding: .5rem !important; }
+.w-100 { width: 100% !important; }
+.h-100 { height: 100% !important; }
+.d-flex { display: flex !important; }
+.d-inline { display: inline !important; }
+.d-none { display: none !important; }
+.justify-content-between { justify-content: space-between !important; }
+.justify-content-end { justify-content: flex-end !important; }
+.align-items-center { align-items: center !important; }
+.align-items-end { align-items: flex-end !important; }
+.flex-wrap { flex-wrap: wrap !important; }
+.gap-2 { gap: .5rem !important; }
+.gap-3 { gap: 1rem !important; }
+.rounded { border-radius: var(--r-chip) !important; }
+.border { border: var(--hair) !important; }
+.border-bottom { border-bottom: var(--hair) !important; }
+
+code, kbd, .mono, .text-mono, .num {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+}
+code, kbd { font-size: max(.8125rem, 12px); }
+code {
+  padding: .1em .35em;
+  border: var(--hair);
+  border-radius: var(--r-chip);
+  background: var(--canvas);
+  color: var(--ink);
+}
+kbd {
+  display: inline-block;
+  padding: .05em .3em;
+  border: var(--hair);
+  border-radius: var(--r-chip);
+  background: var(--tile);
+  color: var(--ink-2);
+}
+.mono, .text-mono, .num { font-size: max(.8125rem, 12px); }
+.num { text-align: left; }
+
+hr {
+  height: 0;
+  margin: 1.5rem 0;
+  border: 0;
+  border-top: var(--hair);
+}
+
+img, svg { max-width: 100%; }
+svg.ic {
+  width: 1.125rem;
+  height: 1.125rem;
+  flex: none;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+:focus { outline: none; }
+:focus-visible {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 2px;
+}
+.btn-sms:focus-visible, .btn-primary:focus-visible, .tile--accent:focus-visible {
+  outline-color: var(--ink);
+}
+
+.skip-link {
+  position: fixed;
+  top: .5rem;
+  left: .5rem;
+  z-index: 1000;
+  padding: .5rem .75rem;
+  border: var(--strong);
+  background: var(--tile);
+  color: var(--ink);
+  transform: translateY(-200%);
+}
+.skip-link:focus { transform: none; }
+
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb {
+  border: 0;
+  border-radius: 0;
+  background: var(--rule);
+}
+::-webkit-scrollbar-thumb:hover { background: var(--ink-3); }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+html[data-motion="reduced"] *,
+html[data-motion="reduced"] *::before,
+html[data-motion="reduced"] *::after {
+  animation-duration: .001ms !important;
+  animation-delay: 0ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0ms !important;
+  transition-delay: 0ms !important;
+  scroll-behavior: auto !important;
+}
+html[data-motion="reduced"] .notif-ticker-track { animation: none !important; transform: none !important; }
+
+/* Every interactive affordance gets a pointer; disabled controls say so. */
+a[href], button, input[type="checkbox"], input[type="radio"], input[type="submit"],
+input[type="button"], input[type="reset"], input[type="file"], input[type="range"],
+select, label[for], summary, [role="button"], [role="tab"], [role="option"],
+[role="menuitem"], [tabindex]:not([tabindex="-1"]), [onclick], [data-action],
+[data-pref-action], [data-href], [data-setting], .btn, .chip, .tab, .segment,
+.tile--link, .list__item--link, th[data-sort], .switch, .stars, .calendar-day,
+.timetable-block, .nav-item, .dropdown-item { cursor: pointer; }
+button:disabled, input:disabled, select:disabled, textarea:disabled,
+[aria-disabled="true"], .is-disabled { cursor: not-allowed !important; }
+input[type="text"], input[type="email"], input[type="password"], input[type="search"],
+input[type="tel"], input[type="url"], input[type="number"], input[type="date"],
+input[type="datetime-local"], input[type="time"], input[type="month"], textarea { cursor: text; }
+[draggable="true"] { cursor: grab; }
+[draggable="true"]:active { cursor: grabbing; }
+
+@media print {
+  body { background: #FFFFFF; color: #000000; }
+}

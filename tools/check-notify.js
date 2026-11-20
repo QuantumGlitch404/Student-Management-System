@@ -1,0 +1,6 @@
+﻿const { chromium } = require('playwright-core');
+(async()=>{const b=await chromium.launch({channel:'chrome',headless:true});const ctx=await b.newContext({viewport:{width:2460,height:1400}});const p=await ctx.newPage();
+await p.goto('http://localhost:8080/Account/Login.aspx',{waitUntil:'networkidle'});await p.locator('input[type=email]').fill('admin@sms.edu');await p.locator('input[type=password]').fill('Admin@123');await Promise.all([p.waitForNavigation({waitUntil:'networkidle'}),p.locator('input[type=submit]').click()]);
+await p.goto('http://localhost:8080/Notifications/Index.aspx',{waitUntil:'networkidle'});
+const m=await p.evaluate(()=>({toolbar:!!document.querySelector('.toolbar'),list:!!document.querySelector('ul.list'),items:document.querySelectorAll('li.list__item').length,docW:document.documentElement.scrollWidth,cw:document.documentElement.clientWidth,page:document.querySelector('.page')?.getBoundingClientRect().width,panel:document.querySelector('.panel')?.getBoundingClientRect().width,toolbarW:document.querySelector('.toolbar')?.getBoundingClientRect().width,liW:document.querySelector('li.list__item')?.getBoundingClientRect().width})); console.log(JSON.stringify(m));
+await p.screenshot({path:'docs/notifications-after-2460.png',fullPage:true}); await b.close();})();

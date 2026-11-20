@@ -1,0 +1,5 @@
+﻿const { chromium } = require('playwright-core');
+(async()=>{const b=await chromium.launch({channel:'chrome',headless:true});const ctx=await b.newContext({viewport:{width:1920,height:1080}});const p=await ctx.newPage();
+await p.goto('http://localhost:8080/Account/Login.aspx',{waitUntil:'networkidle'});await p.locator('input[type=email]').fill('admin@sms.edu');await p.locator('input[type=password]').fill('Admin@123');await Promise.all([p.waitForNavigation({waitUntil:'networkidle'}),p.locator('input[type=submit]').click()]);
+const val=()=>p.evaluate(()=>({f:document.documentElement.dataset.font,z:document.documentElement.dataset.zoom,body:getComputedStyle(document.body).fontSize,side:document.querySelector('.app-sidebar').getBoundingClientRect().width,docW:document.documentElement.scrollWidth,cw:document.documentElement.clientWidth}));
+console.log('before',await val()); const up=p.locator('#smsFontUp'); const disabled=await up.isDisabled(); if(!disabled){for(let i=0;i<4;i++){await up.click(); await p.waitForTimeout(120);}} console.log('after',await val()); await p.reload({waitUntil:'networkidle'}); console.log('reload',await val()); await b.close();})();

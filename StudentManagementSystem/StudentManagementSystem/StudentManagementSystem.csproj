@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" DefaultTargets="Build" TreatAsLocalProperty="Platform" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')"/>
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>15</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{5EF1DCA9-1A7A-4AC3-8AC7-9B60F755AA21}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>StudentManagementSystem</RootNamespace>
+    <AssemblyName>StudentManagementSystem</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <UseIISExpress>true</UseIISExpress>
+    <Use64BitIISExpress>true</Use64BitIISExpress>
+    <IISExpressSSLPort/>
+    <IISExpressAnonymousAuthentication/>
+    <IISExpressWindowsAuthentication/>
+    <IISExpressUseClassicPipelineMode>false</IISExpressUseClassicPipelineMode>
+    <UseGlobalApplicationHostFile/>
+    <NuGetPackageImportStamp/>
+    <FileUpgradeFlags/>
+    <UpgradeBackupLocation/>
+  </PropertyGroup>
+
+  <!-- A solution build passes Platform as "Any CPU" (with a space) while the
+       configuration groups below match "AnyCPU". Normalise it so OutputPath is
+       always set; without this the build can silently skip bin\ . -->
+  <PropertyGroup Condition="'$(Platform)' == 'Any CPU'">
+    <Platform>AnyCPU</Platform>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|AnyCPU'">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+
+  <!-- Safety net for any unexpected Configuration/Platform pair. -->
+  <PropertyGroup Condition="'$(OutputPath)' == ''">
+    <OutputPath>bin\</OutputPath>
+    <DebugType>pdbonly</DebugType>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Reference Include="System"/>
+    <Reference Include="System.Configuration"/>
+    <Reference Include="System.Data"/>
+    <Reference Include="System.Data.DataSetExtensions"/>
+    <Reference Include="System.Drawing"/>
+    <Reference Include="System.IdentityModel"/>
+    <Reference Include="System.IO.Compression"/>
+    <Reference Include="System.Net.Http"/>
+    <Reference Include="System.Security"/>
+    <Reference Include="System.Web"/>
+    <Reference Include="System.Web.Extensions"/>
+    <Reference Include="System.Xml"/>
+    <Reference Include="System.Xml.Linq"/>
+    <Reference Include="Microsoft.CSharp"/>
+    <Reference Include="NodaTime">
+      <HintPath>..\packages\NodaTime.3.2.0\lib\netstandard2.0\NodaTime.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe">
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.6.0.0\lib\net461\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Include="**\*.cs" Exclude="bin\**;obj\**"/>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="**\*.aspx" Exclude="bin\**;obj\**"/>
+    <Content Include="**\*.ashx" Exclude="bin\**;obj\**"/>
+    <Content Include="**\*.ascx" Exclude="bin\**;obj\**"/>
+    <Content Include="**\*.master" Exclude="bin\**;obj\**"/>
+    <Content Include="Content\*\**\*.*" Exclude="bin\**;obj\**"/>
+    <Content Include="Database\**\*.sql"/>
+    <Content Include="Global.asax"/>
+    <None Include="Global.asax.cs"/>
+    <Content Include="Web.config"/>
+  </ItemGroup>
+
+  <PropertyGroup>
+    <AssemblyVersion>1.2.0.0</AssemblyVersion>
+    <FileVersion>1.2.0.0</FileVersion>
+    <InformationalVersion>1.2.0</InformationalVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">17.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <PropertyGroup>
+    <IIS_Express_Username/>
+    <IIS_Express_SecureUsername/>
+    <IIS_Express_HomePage/>
+    <EnableWindowsAuthentication/>
+    <ProjectView>ShowAllFiles</ProjectView>
+  </PropertyGroup>
+
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets"/>
+  <PropertyGroup>
+    <WebAppTargetsFile>$(MSBuildFileDirectory)\..\MSBuild\Microsoft\VisualStudio\$(VisualStudioVersion)\WebApplications\Microsoft.WebApplication.targets</WebAppTargetsFile>
+    <WebAppTargetsFile Condition="$(WebAppTargetsFile.Contains('MSBuild\..\MSBuild'))">$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets</WebAppTargetsFile>
+  </PropertyGroup>
+  <Import Project="$(WebAppTargetsFile)" Condition="Exists('$(WebAppTargetsFile)')"/>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>49915</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:49915/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl/>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+</Project>

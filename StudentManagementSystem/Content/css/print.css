@@ -1,0 +1,182 @@
+﻿@page {
+  margin: 14mm;
+}
+
+@media print {
+  *,
+  *::before,
+  *::after {
+    box-shadow: none !important;
+    text-shadow: none !important;
+    animation: none !important;
+    transition: none !important;
+    background: #FFFFFF !important;
+    color: #000000 !important;
+    filter: none !important;
+    backdrop-filter: none !important;
+  }
+
+  html,
+  body {
+    width: auto !important;
+    height: auto !important;
+    overflow: visible !important;
+    zoom: 1 !important;
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Inter", "Segoe UI", system-ui, "Helvetica Neue", Arial, sans-serif !important;
+    font-size: 10pt !important;
+  }
+
+  .app-sidebar,
+  .topbar,
+  .sidebar-scrim,
+  .sms-chat-fab,
+  .sms-chat-panel,
+  .sms-toast-wrap,
+  .settings-savebar,
+  .nc-toolbar,
+  .ai-side,
+  .ai-compose,
+  .page-actions,
+  .page-head-actions,
+  .btn,
+  .imbtn,
+  .pagination,
+  .no-print,
+  .theme-toggle,
+  .sidebar-toggle {
+    display: none !important;
+  }
+
+  .app-shell,
+  .app-frame {
+    display: block !important;
+    width: 100% !important;
+    height: auto !important;
+    overflow: visible !important;
+  }
+
+  .app-main,
+  .app-content {
+    display: block !important;
+    width: 100% !important;
+    max-width: none !important;
+    height: auto !important;
+    padding: 0 !important;
+    overflow: visible !important;
+  }
+
+  .app-content > * {
+    max-width: none !important;
+  }
+
+  .page-head {
+    padding: 0 0 8pt !important;
+    border-bottom: 2px solid #000000 !important;
+  }
+
+  .page-head h1 {
+    font-size: 22pt !important;
+    letter-spacing: -.02em !important;
+  }
+
+  .page-sub,
+  .kicker,
+  .eyebrow,
+  .tile__head,
+  .tile__text,
+  .muted,
+  .mono {
+    color: #000000 !important;
+  }
+
+  .tile,
+  .panel,
+  .stat-card,
+  .auth-card,
+  .filter-strip,
+  .filter-grid,
+  .settings-note,
+  .msg-empty,
+  .empty-state,
+  .bento > * {
+    border: 1px solid #000000 !important;
+    border-radius: 0 !important;
+    break-inside: avoid;
+  }
+
+  .tile--ink,
+  .tile--accent,
+  .tile--quiet,
+  .bento > :first-child > .stat-card {
+    border-width: 2px !important;
+  }
+
+  .tile__head,
+  .table thead th,
+  .badge,
+  .choice-pill {
+    border-color: #000000 !important;
+    background: #FFFFFF !important;
+    color: #000000 !important;
+  }
+
+  .stat-card .num,
+  .finance-amount,
+  .tile--ink,
+  .tile--accent {
+    color: #000000 !important;
+  }
+
+  .bento,
+  .stat-grid,
+  .grid-kpi,
+  .form-grid,
+  .settings-shell {
+    display: block !important;
+  }
+
+  .bento > *,
+  .stat-grid > *,
+  .grid-kpi > * {
+    width: 100% !important;
+    margin-bottom: 8pt !important;
+    grid-column: auto !important;
+  }
+
+  .table-wrap,
+  .table-responsive,
+  .sms-table-wrap {
+    overflow: visible !important;
+  }
+
+  .table {
+    width: 100% !important;
+    border-collapse: collapse !important;
+    font-size: 9pt !important;
+  }
+
+  .table thead {
+    display: table-header-group;
+  }
+
+  .table tr {
+    break-inside: avoid;
+  }
+
+  .table th,
+  .table td {
+    border: 0 !important;
+    border-bottom: 1px solid #000000 !important;
+    padding: 5px 6px !important;
+  }
+
+  a {
+    color: #000000 !important;
+    text-decoration: none !important;
+  }
+
+  .app-footer {
+    margin-top: 10pt !important;
+    border-top: 2px solid #000000 !important;
+  }
+}

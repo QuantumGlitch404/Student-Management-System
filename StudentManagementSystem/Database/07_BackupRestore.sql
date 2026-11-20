@@ -1,0 +1,29 @@
+-- ==============================================================
+-- 07_BackupRestore.sql - backup & recovery (documentational + runnable)
+-- ==============================================================
+-- FULL BACKUP (works on any SQL Server instance incl. LocalDB):
+--   BACKUP DATABASE [StudentSMS]
+--   TO DISK = 'C:\Backups\StudentSMS_FULL.bak'
+--   WITH COMPRESSION, INIT, STATS = 25;
+--
+-- DIFFERENTIAL BACKUP:
+--   BACKUP DATABASE [StudentSMS] TO DISK = 'C:\Backups\StudentSMS_DIFF.bak'
+--   WITH DIFFERENTIAL;
+--
+-- RESTORE (must be a full restore first):
+--   RESTORE DATABASE [StudentSMS] FROM DISK = 'C:\Backups\StudentSMS_FULL.bak' WITH REPLACE, RECOVERY;
+--   RESTORE DATABASE [StudentSMS] FROM DISK = 'C:\Backups\StudentSMS_DIFF.bak'  WITH RECOVERY;
+--
+-- VERIFY integrity (run weekly):
+--   DBCC CHECKDB ([StudentSMS]) WITH NO_INFOMSGS;
+--
+-- Scheduled backups with SQL Agent (production): create a weekly FULL + daily DIFF
+-- + hourly LOG job; keep a 14-day retention window. LocalDB dev instances: run the
+-- FULL backup manually before major schema changes (or use 99_TearDown.sql + re-run
+-- scripts 01..06, which reproduces a fresh database in minutes).
+--
+-- INTEGRITY CHECKLIST
+--   1. Run DBCC CHECKDB after restore (no allocation errors expected).
+--   2. Compare row counts of key tables before/after backup.
+--   3. Log in as admin and open the Admin Dashboard to confirm live queries succeed.
+-- ==============================================================

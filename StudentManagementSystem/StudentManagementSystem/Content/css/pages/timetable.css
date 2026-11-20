@@ -1,0 +1,130 @@
+﻿/* ========================================================================
+   Timetable page styles â€” Split View + Context Bar + Focus Mode
+   Uses existing tokens, tiles, hairlines. No new colours.
+======================================================================== */
+
+/* Context Bar overrides for Timetable */
+.context-bar .context-bar__select-wrap { flex: 1; min-width: 14rem; max-width: 20rem; }
+.context-bar .context-bar__select-wrap .form-select { width: 100%; }
+
+/* Split View â€” Timetable specific */
+.split-view { grid-template-columns: 300px 1fr; }
+.split-view__left { min-width: 260px; max-width: 380px; }
+.split-view__left-header { padding: 1rem; border-bottom: var(--hairline) solid var(--rule); background: var(--canvas); }
+.split-view__left-body { flex: 1; overflow-y: auto; padding: 0.5rem; }
+.split-view__left-footer { padding: 1rem; border-top: var(--hairline) solid var(--rule); background: var(--canvas); }
+
+.split-view__right-header { padding: 0.75rem 1.25rem; }
+.split-view__right-body { padding: 1.25rem; }
+
+/* Course cards in left pane */
+.tt-course-card {
+  display: block;
+  padding: 0.875rem 1rem;
+  border-radius: var(--r-md);
+  color: var(--ink);
+  text-decoration: none;
+  border: var(--hairline) solid var(--rule);
+  margin-bottom: 0.5rem;
+  background: var(--canvas);
+  transition: border-color 0.15s, box-shadow 0.15s, background 0.15s;
+}
+.tt-course-card:hover {
+  border-color: var(--accent);
+  box-shadow: var(--shadow-sm);
+  background: var(--surface);
+}
+.tt-course-card.is-selected {
+  border-color: var(--accent);
+  background: var(--accent-alpha);
+  box-shadow: 0 0 0 2px var(--accent-alpha);
+}
+.tt-course-card__header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 0.25rem; }
+.tt-course-card__code { font-weight: 700; font-size: 0.875rem; }
+.tt-course-card__section { font-size: 0.75rem; color: var(--ink-3); background: var(--surface); padding: 0.125rem 0.5rem; border-radius: var(--r-sm); }
+.tt-course-card__name { font-size: 0.875rem; color: var(--ink-2); margin-bottom: 0.375rem; white-space: normal; overflow-wrap: anywhere; }
+.tt-course-card__meta { display: flex; flex-wrap: wrap; gap: 0.5rem; font-size: 0.75rem; color: var(--ink-3); }
+.tt-meta { display: inline-flex; align-items: center; gap: 0.25rem; }
+.tt-meta i { font-size: 0.7rem; }
+
+/* Selected course info in right header */
+.tt-selected-course { font-size: 1rem; }
+.tt-selected-course.text-muted { font-style: italic; }
+
+/* Week grid */
+.tt-grid-wrap { overflow: auto; max-width: 100%; }
+.tt-table { width: 100%; max-width: 100%; border-collapse: collapse; table-layout: fixed; }
+.tt-table th, .tt-table td { white-space: normal; overflow-wrap: anywhere; vertical-align: top; }
+.tt-table thead th {
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  background: var(--canvas);
+  border-bottom: 2px solid var(--rule);
+  padding: 0.625rem 0.75rem;
+  text-align: left;
+  font-weight: 600;
+  font-size: 0.8125rem;
+  color: var(--ink-2);
+  white-space: nowrap;
+}
+.tt-table tbody td {
+  padding: 0.625rem 0.75rem;
+  border-bottom: var(--hairline) solid var(--rule);
+  vertical-align: top;
+  font-size: 0.875rem;
+}
+.tt-table tbody tr:hover { background: var(--surface); }
+.tt-table tbody tr.tt-row-today { background: var(--info-alpha); }
+.tt-table tbody tr.tt-row-conflict { background: var(--danger-alpha); }
+
+.tt-day { font-weight: 600; font-size: 0.8125rem; }
+.tt-day + .badge { margin-left: 0.375rem; }
+
+.tt-time { white-space: nowrap; font-size: 0.8125rem; }
+
+.tt-note { font-style: italic; color: var(--ink-3); margin-top: 0.125rem; }
+
+/* Conflict row highlight */
+.tt-row-conflict td { border-left: 3px solid var(--danger); }
+
+/* Selected course info */
+.tt-selected-course { display: inline-flex; align-items: center; gap: 0.5rem; }
+
+/* Admin form */
+.tt-form .form-label { font-weight: 500; margin-bottom: 0.25rem; }
+.tt-form .form-control-sm, .tt-form .form-select-sm { font-size: 0.8125rem; padding: 0.375rem 0.625rem; }
+
+/* Focus mode adjustments */
+body.is-focus-mode .app-header,
+body.is-focus-mode .app-sidebar,
+body.is-focus-mode .page-head:not(.focus-mode-keep),
+body.is-focus-mode .context-bar:not(.focus-mode-keep),
+body.is-focus-mode .split-view__left {
+  display: none !important;
+}
+body.is-focus-mode .app-shell { grid-template-columns: 1fr; }
+body.is-focus-mode .split-view { grid-template-columns: 1fr; height: 100dvh; }
+body.is-focus-mode .split-view__right { height: 100%; display: flex; flex-direction: column; }
+body.is-focus-mode .split-view__right-header { position: sticky; top: 0; z-index: 10; }
+body.is-focus-mode .split-view__right-body { flex: 1; overflow: auto; }
+
+/* Stats tiles */
+.tt-stats { display: flex; gap: 1rem; flex-wrap: wrap; }
+.tt-stat { flex: 1; min-width: 8rem; text-align: center; padding: 1rem; background: var(--canvas); border: var(--hairline) solid var(--rule); border-radius: var(--r-md); }
+.tt-stat__value { display: block; font-size: 1.75rem; font-weight: 700; color: var(--accent); line-height: 1.2; }
+.tt-stat__label { display: block; font-size: 0.75rem; color: var(--ink-3); margin-top: 0.25rem; }
+
+/* Focus mode toggle button in header */
+.focus-mode-toggle.is-active { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); }
+
+/* Responsive */
+@media (max-width: 90rem) {
+  .split-view { grid-template-columns: 280px 1fr; }
+}
+@media (max-width: 60rem) {
+  .split-view { grid-template-columns: 1fr; height: auto; min-height: 0; }
+  .split-view__left { max-width: none; border-right: none; border-bottom: var(--hairline) solid var(--rule); }
+  .split-view__right-header { position: sticky; top: 0; z-index: 10; }
+  .context-bar { position: static; }
+}

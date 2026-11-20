@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light" data-theme-pref="light" data-font="100" data-motion="full" data-zoom="100">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<meta name="robots" content="noindex, nofollow"/>
+<title>Component contract - Swiss Modernism</title>
+<link rel="icon" href="/Content/icons/favicon.svg" type="image/svg+xml"/>
+<link rel="stylesheet" href="/Content/vendor/bootstrap/bootstrap.min.css"/>
+<link rel="stylesheet" href="/Content/css/fonts.css"/>
+<link rel="stylesheet" href="/Content/css/tokens.css"/>
+<link rel="stylesheet" href="/Content/css/base.css"/>
+<link rel="stylesheet" href="/Content/css/components.css"/>
+<link rel="stylesheet" href="/Content/css/layout.css"/>
+<link rel="stylesheet" href="/Content/css/bento.css"/>
+<link rel="stylesheet" href="/Content/css/pages/dashboard.css"/>
+<link rel="stylesheet" href="/Content/css/pages/chat.css"/>
+<link rel="stylesheet" href="/Content/css/pages/settings.css"/>
+<link rel="stylesheet" href="/Content/css/pages/misc.css"/>
+<style>
+.sg-body {
+  min-height: 100dvh;
+  padding: 2rem;
+  background: var(--canvas);
+  color: var(--ink);
+  font-family: var(--font-ui);
+  overflow-wrap: anywhere;
+}
+main.page { container-type: inline-size; container-name: main; }
+.sg-top > * { min-width: 0; }
+.sg-top .build-stamp { white-space: normal; }
+.ai-suggests .ai-suggest { white-space: normal; height: auto; }
+.sg-wrap {
+  width: min(88rem, 100%);
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap);
+}
+.sg-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+  padding-bottom: 1rem;
+  border-bottom: var(--strong);
+}
+.sg-top h1 { margin: 0; }
+.sg-section { display: flex; flex-direction: column; gap: 0; }
+.sg-grid { display: grid; gap: var(--gap); grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.sg-row { display: flex; flex-wrap: wrap; gap: .75rem; align-items: center; }
+.sg-stack { display: flex; flex-direction: column; gap: .65rem; }
+.sg-swatches { display: grid; grid-template-columns: repeat(auto-fit, minmax(7rem, 1fr)); gap: .65rem; }
+.sg-swatch {
+  min-height: 5rem;
+  padding: .75rem;
+  border: var(--hair);
+  border-radius: var(--r-tile);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  font-family: var(--font-mono);
+  font-size: max(.8rem, 12.5px);
+}
+.sg-drop {
+  display: grid;
+  place-items: center;
+  min-height: 7rem;
+  padding: 1rem;
+  border: 1px dashed var(--rule);
+  border-radius: var(--r-tile);
+  background: var(--canvas);
+  color: var(--ink-2);
+  font-family: var(--font-mono);
+  font-size: max(.8rem, 12.5px);
+}
+.sg-loading { display: inline-flex; gap: .25rem; align-items: center; }
+.sg-loading span { width: 6px; height: 6px; border-radius: 50%; background: currentColor; animation: sg-blink 1s ease-in-out infinite; }
+.sg-loading span:nth-child(2) { animation-delay: .15s; }
+.sg-loading span:nth-child(3) { animation-delay: .3s; }
+@keyframes sg-blink { 0%, 100% { opacity: .25; } 40% { opacity: 1; } }
+.sg-chart {
+  display: flex;
+  align-items: flex-end;
+  gap: 1rem;
+  height: 9rem;
+  padding: 1.25rem;
+  border: var(--hair);
+  border-radius: var(--r-tile);
+  background: var(--canvas);
+}
+.sg-bar { flex: 1; border-radius: var(--r-chip) var(--r-chip) 0 0; background: var(--accent); }
+@media (max-width: 47.998em) {
+  .sg-body { padding: 1rem; }
+  .sg-grid { grid-template-columns: minmax(0, 1fr); }
+}
+</style>
+</head>
+<body class="sg-body">
+<main class="page">
+<div class="sg-wrap">
+<div class="sg-top">
+<div>
+<div class="kicker">Swiss Modernism 2.0 / Bento Grid</div>
+<h1>Component contract</h1>
+<p class="page-sub">One type system. One accent. Hairline rules. Flat surfaces. Twelve columns.</p>
+</div>
+<div class="cluster">
+<div class="sms-themeseg" role="group" aria-label="Theme">
+<button type="button" class="sms-themeseg-btn active" data-sg-theme="light">LIGHT</button>
+<button type="button" class="sms-themeseg-btn" data-sg-theme="dark">DARK</button>
+<button type="button" class="sms-themeseg-btn" data-sg-theme="eye">EYE</button>
+</div>
+<span class="build-stamp">STYLE CONTRACT · BUILD 20261116-1813 / 5B529985</span>
+</div>
+</div>
+
+<div class="bento">
+<section class="c-8 tile tile--hero">
+<div class="tile__head"><span class="kicker">Foundation</span><span class="badge badge-info">SF Pro / Inter + JetBrains Mono</span></div>
+<div class="tile__body">
+<h1>Attendance. Results. Fees.</h1>
+<p class="lead mb-0">Swiss Modernism uses a strict grid, flush-left type, mono data labels and a single functional accent. Surfaces stay white, borders stay 1px, and nothing floats.</p>
+</div>
+</section>
+<aside class="c-4 tile tile--quiet">
+<div class="tile__head"><span class="kicker">Rules</span></div>
+<div class="tile__body">
+<ul class="list">
+<li class="list__item"><div class="list__body"><span class="list__title">12 columns</span><span class="list__msg">8px unit, 1rem gutters.</span></div></li>
+<li class="list__item"><div class="list__body"><span class="list__title">No elevation</span><span class="list__msg">No shadows, gradients or blur.</span></div></li>
+<li class="list__item"><div class="list__body"><span class="list__title">One accent</span><span class="list__msg">Blue for action, never decoration.</span></div></li>
+</ul>
+</div>
+</aside>
+
+<section class="c-6 tile">
+<div class="tile__head"><span class="h5 mb-0">Typography</span><span class="badge badge-muted">Scale</span></div>
+<div class="tile__body">
+<h2 class="h4">Panel title</h2>
+<h3 class="h5">Section heading</h3>
+<p>Body copy uses the Apple system stack with bundled Inter fallback. Labels, IDs, timestamps, amounts and table headers use JetBrains Mono.</p>
+<p class="text-muted mb-0">Supporting text never drops below 12px on any viewport.</p>
+</div>
+</section>
+<section class="c-6 tile">
+<div class="tile__head"><span class="h5 mb-0">Data</span><span class="badge badge-muted">Mono</span></div>
+<div class="tile__body">
+<div class="kicker">Label / table header</div>
+<div class="kpi__value">248</div>
+<div class="kpi__note mb-3">Students enrolled this term</div>
+<div class="mono">REG-2025-0007 · 14 Nov 2026, 16:23</div>
+</div>
+</section>
+
+<section class="c-12 tile">
+<div class="tile__head"><span class="h5 mb-0">Colour and surfaces</span><span class="badge badge-muted">Token only</span></div>
+<div class="tile__body">
+<div class="sg-swatches">
+<div class="sg-swatch" style="background:var(--canvas);color:var(--ink)">CANVAS<br><span class="text-muted">#F4F3EF</span></div>
+<div class="sg-swatch" style="background:var(--tile);color:var(--ink)">TILE<br><span class="text-muted">#FFFFFF</span></div>
+<div class="sg-swatch" style="background:var(--ink);color:var(--on-ink)">INK<br><span style="color:var(--on-ink-2)">#0B0B0C</span></div>
+<div class="sg-swatch" style="background:var(--accent);color:var(--on-accent)">ACCENT<br><span style="color:var(--on-accent)">#1B3BFF</span></div>
+<div class="sg-swatch" style="background:var(--tile);color:var(--success)">SUCCESS<br><span class="text-muted">status dot</span></div>
+<div class="sg-swatch" style="background:var(--tile);color:var(--ink-2)"><span class="legend-dot" style="background:var(--warning)"></span> WARNING<br><span class="text-muted">status dot</span></div>
+<div class="sg-swatch" style="background:var(--tile);color:var(--danger)">DANGER<br><span class="text-muted">status dot</span></div>
+</div>
+<p class="small text-muted mt-3 mb-0">Borders are 1px hairlines or 2px ink rules. Radii are 0, 3px, 4px, 6px, 8px, 50% and 999px only.</p>
+</div>
+</section>
+
+<section class="c-6 tile">
+<div class="tile__head"><span class="h5 mb-0">Buttons and actions</span></div>
+<div class="tile__body">
+<div class="sg-row mb-3">
+<button class="btn btn-sms" type="button">Save changes</button>
+<button class="btn btn-outline-sms" type="button">Cancel</button>
+<button class="btn" type="button">Neutral</button>
+<button class="btn btn-danger" type="button">Delete</button>
+<a class="btn btn-link" href="#">View all</a>
+</div>
+<div class="sg-row mb-3">
+<button class="btn btn-sm btn-sms" type="button">Small primary</button>
+<button class="btn btn-sm btn-outline-sms" type="button">Edit</button>
+<button class="btn" type="button" disabled>Disabled</button>
+<button class="imbtn" type="button">Row action</button>
+<button class="sms-iconbtn" type="button" aria-label="Search"><svg class="ic" aria-hidden="true"><use href="/Content/icons/sprite.svg#i-search"></use></svg></button>
+</div>
+<div class="sg-row">
+<button class="btn btn-sms" type="button" aria-busy="true"><span class="sg-loading"><span></span><span></span><span></span></span> Loading</button>
+<button class="btn btn-danger" type="button" aria-label="Delete"><svg class="ic" aria-hidden="true"><use href="/Content/icons/sprite.svg#i-trash"></use></svg></button>
+</div>
+</div>
+</section>
+<section class="c-6 tile">
+<div class="tile__head"><span class="h5 mb-0">Inputs</span></div>
+<div class="tile__body">
+<div class="field mb-3"><label for="sgName">Full name</label><input id="sgName" class="form-control" type="text" placeholder="e.g. Aditya Verma"/><div class="form-text">Used across all records.</div></div>
+<div class="field mb-3"><label for="sgYear">Year</label><select id="sgYear" class="form-select"><option>Year 1</option><option>Year 2</option><option>Year 3</option></select></div>
+<div class="field mb-3"><label for="sgFocus">Focus state</label><input id="sgFocus" class="form-control" type="text" value="Focused input"/></div>
+<div class="field mb-0"><label for="sgBad">Error state</label><input id="sgBad" class="form-control is-invalid" type="email" value="bad@email"/><div class="field-validation-error">Enter a valid email address.</div></div>
+</div>
+</section>
+
+<section class="c-4 tile">
+<div class="tile__head"><span class="h5 mb-0">Checkbox and radio</span></div>
+<div class="tile__body">
+<div class="sg-stack">
+<label class="form-check"><input class="form-check-input" type="checkbox" checked/> <span class="form-check-label">Remember me</span></label>
+<label class="form-check"><input class="form-check-input" type="checkbox"/> <span class="form-check-label">Subscribe to notices</span></label>
+<label class="form-check"><input class="form-check-input" type="radio" name="sgR" checked/> <span class="form-check-label">Option A</span></label>
+<label class="form-check"><input class="form-check-input" type="radio" name="sgR"/> <span class="form-check-label">Option B</span></label>
+<label class="form-check form-switch"><input class="form-check-input" type="checkbox" checked/> <span class="form-check-label">Notifications</span></label>
+</div>
+</div>
+</section>
+<section class="c-4 tile">
+<div class="tile__head"><span class="h5 mb-0">Chips and tabs</span></div>
+<div class="tile__body">
+<div class="sg-row mb-3">
+<span class="choice-pill is-on">Active</span>
+<span class="choice-pill">Inactive</span>
+<span class="choice-pill">New</span>
+</div>
+<ul class="nav-tabs" role="tablist">
+<li class="nav-item"><button class="nav-link active" type="button">Courses</button></li>
+<li class="nav-item"><button class="nav-link" type="button">Subjects</button></li>
+<li class="nav-item"><button class="nav-link" type="button">Exams</button></li>
+</ul>
+</div>
+</section>
+<section class="c-4 tile">
+<div class="tile__head"><span class="h5 mb-0">Badges and alerts</span></div>
+<div class="tile__body">
+<div class="sg-row mb-3">
+<span class="badge badge-ok">Active</span>
+<span class="badge badge-warn">Pending</span>
+<span class="badge badge-bad">Suspended</span>
+<span class="badge badge-info">New</span>
+<span class="badge badge-muted">Neutral</span>
+</div>
+<div class="sg-stack">
+<div class="alert alert-success mb-0">Changes saved successfully.</div>
+<div class="alert alert-warning mb-0">Your session expires in five minutes.</div>
+<div class="alert alert-danger mb-0">The record could not be updated.</div>
+</div>
+</div>
+</section>
+
+<section class="c-12 tile">
+<div class="tile__head"><span class="h5 mb-0">KPI cards</span><span class="badge badge-muted">Four across</span></div>
+<div class="tile__body">
+<div class="grid-kpi">
+<article class="kpi"><header class="kpi__head">Students</header><div class="kpi__body"><div class="kpi__value">248</div><p class="kpi__note">Enrolled this term</p></div></article>
+<article class="kpi"><header class="kpi__head">Courses</header><div class="kpi__body"><div class="kpi__value">36</div><p class="kpi__note">Active course codes</p></div></article>
+<article class="kpi" data-attention="true"><header class="kpi__head">Unpaid fees</header><div class="kpi__body"><div class="kpi__value">12</div><p class="kpi__note">Outstanding balances</p></div></article>
+<article class="kpi"><header class="kpi__head">Complaints</header><div class="kpi__body"><div class="kpi__value">4</div><p class="kpi__note">Open this week</p></div></article>
+</div>
+</div>
+</section>
+
+<section class="c-8 tile">
+<div class="tile__head"><span class="h5 mb-0">Table</span><button class="btn btn-sm btn-outline-sms" type="button">Export</button></div>
+<div class="tile__body sms-table-wrap">
+<table class="table table-sm">
+<thead><tr><th>Enrollment</th><th>Student</th><th>Course</th><th>Status</th><th class="text-end">Actions</th></tr></thead>
+<tbody>
+<tr><td class="mono">REG-2025-0007</td><td>Aditya Verma<span class="row-sub">aditya@sms.edu</span></td><td class="mono">BSC-CS</td><td><span class="badge badge-ok">Active</span></td><td class="text-end"><button class="imbtn" type="button">Edit</button> <button class="imbtn" type="button">More</button></td></tr>
+<tr><td class="mono">REG-2025-0008</td><td>Ishita Bose<span class="row-sub">ishita@sms.edu</span></td><td class="mono">BBA</td><td><span class="badge badge-warn">Pending</span></td><td class="text-end"><button class="imbtn" type="button">Edit</button> <button class="imbtn" type="button">More</button></td></tr>
+</tbody>
+</table>
+<div class="tile__foot cluster justify-content-between">
+<span class="mono text-muted">Showing 1-2 of 248</span>
+<nav class="pagination m-0" aria-label="Pages"><span class="page-item active"><span class="page-link">1</span></span><span class="page-item"><span class="page-link">2</span></span><span class="page-item"><span class="page-link">3</span></span></nav>
+</div>
+</div>
+</section>
+<section class="c-4 tile">
+<div class="tile__head"><span class="h5 mb-0">List</span></div>
+<div class="tile__body">
+<ul class="list">
+<li class="list__item"><div class="list__body"><span class="list__title">Fee reminder</span><span class="list__msg">Two instalments are due this week.</span></div></li>
+<li class="list__item is-unread"><div class="list__body"><span class="list__title">Attendance alert</span><span class="list__msg">Attendance fell below the required threshold.</span></div></li>
+</ul>
+</div>
+</section>
+
+<section class="c-8 tile">
+<div class="tile__head"><span class="h5 mb-0">Chart</span><span class="badge badge-info">Enrolment</span></div>
+<div class="tile__body">
+<div class="sg-chart"><div class="sg-bar" style="height:58%"></div><div class="sg-bar" style="height:82%"></div><div class="sg-bar" style="height:44%"></div><div class="sg-bar" style="height:92%"></div><div class="sg-bar" style="height:68%"></div></div>
+</div>
+</section>
+<section class="c-4 tile">
+<div class="tile__head"><span class="h5 mb-0">Chat bubbles</span><span class="badge badge-ok">Local model</span></div>
+<div class="tile__body">
+<div class="ai-msg me"><div class="ai-avatar">A</div><div class="ai-bubble-wrap"><div class="ai-who">You</div><div class="ai-bubble"><p class="mb-0">What is my attendance this week?</p></div></div></div>
+<div class="ai-msg"><div class="ai-avatar">S</div><div class="ai-bubble-wrap"><div class="ai-who">Assistant</div><div class="ai-bubble"><p class="mb-0">Your attendance this week is <strong>94%</strong>. You were present for 14 of 15 sessions.</p></div></div></div>
+<div class="ai-suggests"><button class="ai-suggest" type="button">Explain this page</button><button class="ai-suggest" type="button">Summarise my fees</button></div>
+</div>
+</section>
+
+<section class="c-6 tile">
+<div class="tile__head"><span class="h5 mb-0">Modal</span></div>
+<div class="tile__body">
+<div class="modal-content">
+<div class="modal-header"><h5 class="modal-title">Confirm action</h5><button class="btn-close" type="button" aria-label="Close"></button></div>
+<div class="modal-body"><p class="mb-0">Are you sure you want to delete this record? This cannot be undone.</p></div>
+<div class="modal-footer cluster justify-content-end"><button class="btn btn-outline-sms" type="button">Cancel</button><button class="btn btn-danger" type="button">Delete</button></div>
+</div>
+</div>
+</section>
+<section class="c-6 tile">
+<div class="tile__head"><span class="h5 mb-0">Toast and empty state</span></div>
+<div class="tile__body">
+<div class="sms-toast"><div><div class="sms-toast-head"><strong>Saved</strong><button class="sms-toast-close" type="button" aria-label="Dismiss">&times;</button></div><div class="sms-toast-msg">Record saved successfully.</div></div><div class="sms-toast-bar"></div></div>
+<div class="msg-empty"><h3>No records yet</h3><p>New records will appear here.</p></div>
+</div>
+</section>
+</div>
+</div>
+</main>
+<script>
+(function () {
+  var root = document.documentElement;
+  var buttons = document.querySelectorAll("[data-sg-theme]");
+  function apply(theme) {
+    root.setAttribute("data-theme", theme);
+    root.setAttribute("data-theme-pref", theme);
+    for (var i = 0; i < buttons.length; i++) buttons[i].classList.toggle("active", buttons[i].getAttribute("data-sg-theme") === theme);
+  }
+  for (var i = 0; i < buttons.length; i++) buttons[i].addEventListener("click", function () { apply(this.getAttribute("data-sg-theme")); });
+  apply(root.getAttribute("data-theme") || "light");
+})();
+</script>
+</body>
+</html>

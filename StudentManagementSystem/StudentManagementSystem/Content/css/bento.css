@@ -1,0 +1,178 @@
+﻿/* Bento composition: 12 columns, interlocking tiles, no holes. */
+.bento {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  grid-auto-flow: row dense;
+  grid-auto-rows: auto;
+  gap: var(--gap);
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  align-items: stretch;
+}
+.bento > * {
+  min-width: 0;
+  max-width: none;
+  height: 100%;
+  margin: 0;
+}
+.bento > .tile,
+.bento > .panel,
+.bento > .card,
+.bento > .kpi,
+.bento > .stat-card { height: 100%; }
+.bento > .col,
+.bento > [class*="col-"] {
+  width: auto;
+  max-width: none;
+  flex: none;
+  padding: 0;
+}
+
+.bento > .c-1 { grid-column: span 1; }
+.bento > .c-2 { grid-column: span 2; }
+.bento > .c-3 { grid-column: span 3; }
+.bento > .c-4 { grid-column: span 4; }
+.bento > .c-5 { grid-column: span 5; }
+.bento > .c-6 { grid-column: span 6; }
+.bento > .c-7 { grid-column: span 7; }
+.bento > .c-8 { grid-column: span 8; }
+.bento > .c-9 { grid-column: span 9; }
+.bento > .c-10 { grid-column: span 10; }
+.bento > .c-11 { grid-column: span 11; }
+.bento > .c-12 { grid-column: span 12; }
+.bento > .c-full { grid-column: 1 / -1; }
+
+.r-2 { grid-row: span 2; }
+.r-3 { grid-row: span 3; }
+.r-full { grid-row: 1 / -1; }
+
+/* Bootstrap column numbers map into the 12-column bento. */
+.bento > .col-1, .bento > .col-sm-1, .bento > .col-md-1, .bento > .col-lg-1, .bento > .col-xl-1, .bento > .col-xxl-1 { grid-column: span 1; }
+.bento > .col-2, .bento > .col-sm-2, .bento > .col-md-2, .bento > .col-lg-2, .bento > .col-xl-2, .bento > .col-xxl-2 { grid-column: span 2; }
+.bento > .col-3, .bento > .col-sm-3, .bento > .col-md-3, .bento > .col-lg-3, .bento > .col-xl-3, .bento > .col-xxl-3 { grid-column: span 3; }
+.bento > .col-4, .bento > .col-sm-4, .bento > .col-md-4, .bento > .col-lg-4, .bento > .col-xl-4, .bento > .col-xxl-4 { grid-column: span 4; }
+.bento > .col-5, .bento > .col-sm-5, .bento > .col-md-5, .bento > .col-lg-5, .bento > .col-xl-5, .bento > .col-xxl-5 { grid-column: span 5; }
+.bento > .col-6, .bento > .col-sm-6, .bento > .col-md-6, .bento > .col-lg-6, .bento > .col-xl-6, .bento > .col-xxl-6 { grid-column: span 6; }
+.bento > .col-7, .bento > .col-sm-7, .bento > .col-md-7, .bento > .col-lg-7, .bento > .col-xl-7, .bento > .col-xxl-7 { grid-column: span 7; }
+.bento > .col-8, .bento > .col-sm-8, .bento > .col-md-8, .bento > .col-lg-8, .bento > .col-xl-8, .bento > .col-xxl-8 { grid-column: span 8; }
+.bento > .col-9, .bento > .col-sm-9, .bento > .col-md-9, .bento > .col-lg-9, .bento > .col-xl-9, .bento > .col-xxl-9 { grid-column: span 9; }
+.bento > .col-10, .bento > .col-sm-10, .bento > .col-md-10, .bento > .col-lg-10, .bento > .col-xl-10, .bento > .col-xxl-10 { grid-column: span 10; }
+.bento > .col-11, .bento > .col-sm-11, .bento > .col-md-11, .bento > .col-lg-11, .bento > .col-xl-11, .bento > .col-xxl-11 { grid-column: span 11; }
+.bento > .col-12, .bento > .col-sm-12, .bento > .col-md-12, .bento > .col-lg-12, .bento > .col-xl-12, .bento > .col-xxl-12 { grid-column: span 12; }
+
+/* KPI rows: default four across, then two, then one. */
+.grid-kpi {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  grid-auto-flow: row dense;
+  gap: var(--gap);
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  align-items: stretch;
+}
+.grid-kpi > * { min-width: 0; height: 100%; }
+.grid-kpi > .kpi,
+.grid-kpi > .stat-card,
+.grid-kpi > .tile,
+.grid-kpi > .card { grid-column: span 3; }
+.grid-kpi > .c-4 { grid-column: span 4; }
+.grid-kpi > .c-6 { grid-column: span 6; }
+.grid-kpi > .c-12 { grid-column: span 12; }
+.grid-kpi > .stat-card--wide,
+.grid-kpi > .kpi--wide { grid-column: span 6; }
+
+/* Five-stat rows divide 12 as 3+3+2+2+2, so the row stays full. */
+.bento:has(> :nth-child(5):last-child) > .c-3:nth-child(-n+2) { grid-column: span 3; }
+.bento:has(> :nth-child(5):last-child) > .c-3:nth-child(n+3) { grid-column: span 2; }
+
+/* Hero and emphasis are about size and one ink/accent surface, not decoration. */
+.tile--hero { padding: 1.5rem; }
+.tile--hero .tile-title { font-size: clamp(1.25rem, 2vw, 1.75rem); }
+.tile--ink { border-color: var(--ink); background: var(--ink); color: var(--tile); }
+.tile--ink .tile-title, .tile--ink .tile-sub, .tile--ink h1, .tile--ink h2, .tile--ink h3,
+.tile--ink h4, .tile--ink h5, .tile--ink h6, .tile--ink strong, .tile--ink .kpi-value,
+.tile--ink .stat-value, .tile--ink .data-num { color: var(--tile); }
+.tile--ink .tile-sub, .tile--ink .kicker, .tile--ink .data-label, .tile--ink .kpi-label,
+.tile--ink .stat-label, .tile--ink .muted, .tile--ink .text-muted { color: color-mix(in srgb, var(--tile) 68%, transparent); }
+.tile--ink .kpi-foot, .tile--ink .stat-foot, .tile--ink .tile-foot { border-top-color: color-mix(in srgb, var(--tile) 24%, transparent); }
+.tile--ink .badge, .tile--accent .badge { border-color: color-mix(in srgb, var(--tile) 35%, transparent); background: transparent; color: var(--tile); }
+.tile--accent { border-color: var(--accent); background: var(--accent); color: var(--on-accent); }
+.tile--accent .tile-title, .tile--accent .tile-sub, .tile--accent h1, .tile--accent h2,
+.tile--accent h3, .tile--accent h4, .tile--accent h5, .tile--accent h6,
+.tile--accent strong, .tile--accent .kpi-value, .tile--accent .stat-value { color: var(--on-accent); }
+.tile--accent .tile-sub, .tile--accent .kicker, .tile--accent .data-label,
+.tile--accent .kpi-label, .tile--accent .stat-label, .tile--accent .muted,
+.tile--accent .text-muted { color: color-mix(in srgb, var(--on-accent) 72%, transparent); }
+.tile--accent .kpi-foot, .tile--accent .stat-foot, .tile--accent .tile-foot { border-top-color: color-mix(in srgb, var(--on-accent) 32%, transparent); }
+.tile--quiet { background: var(--canvas); }
+
+/* Keep tables and long forms usable inside a half-width tile. */
+.bento .table-wrap { max-width: 100%; }
+.bento .tile > .table-wrap:last-child { margin-bottom: 0; }
+.bento > .table-wrap { overflow: auto; }
+
+@container main (max-width: 47.99rem) {
+  .bento { grid-template-columns: repeat(6, minmax(0, 1fr)); }
+  .bento > .c-1 { grid-column: span 1; }
+  .bento > .c-2 { grid-column: span 1; }
+  .bento > .c-3 { grid-column: span 2; }
+  .bento > .c-4 { grid-column: span 2; }
+  .bento > .c-5 { grid-column: span 3; }
+  .bento > .c-6 { grid-column: span 3; }
+  .bento > .c-7 { grid-column: span 4; }
+  .bento > .c-8 { grid-column: span 4; }
+  .bento > .c-9 { grid-column: span 5; }
+  .bento > .c-10 { grid-column: span 5; }
+  .bento > .c-11 { grid-column: span 6; }
+  .bento > .c-12 { grid-column: span 6; }
+  .bento > .col-1, .bento > .col-sm-1, .bento > .col-md-1, .bento > .col-lg-1, .bento > .col-xl-1, .bento > .col-xxl-1 { grid-column: span 1; }
+  .bento > .col-2, .bento > .col-sm-2, .bento > .col-md-2, .bento > .col-lg-2, .bento > .col-xl-2, .bento > .col-xxl-2,
+  .bento > .col-3, .bento > .col-sm-3, .bento > .col-md-3, .bento > .col-lg-3, .bento > .col-xl-3, .bento > .col-xxl-3,
+  .bento > .col-4, .bento > .col-sm-4, .bento > .col-md-4, .bento > .col-lg-4, .bento > .col-xl-4, .bento > .col-xxl-4 { grid-column: span 2; }
+  .bento > .col-5, .bento > .col-sm-5, .bento > .col-md-5, .bento > .col-lg-5, .bento > .col-xl-5, .bento > .col-xxl-5,
+  .bento > .col-6, .bento > .col-sm-6, .bento > .col-md-6, .bento > .col-lg-6, .bento > .col-xl-6, .bento > .col-xxl-6 { grid-column: span 3; }
+  .bento > .col-7, .bento > .col-sm-7, .bento > .col-md-7, .bento > .col-lg-7, .bento > .col-xl-7, .bento > .col-xxl-7,
+  .bento > .col-8, .bento > .col-sm-8, .bento > .col-md-8, .bento > .col-lg-8, .bento > .col-xl-8, .bento > .col-xxl-8 { grid-column: span 4; }
+  .bento > .col-9, .bento > .col-sm-9, .bento > .col-md-9, .bento > .col-lg-9, .bento > .col-xl-9, .bento > .col-xxl-9,
+  .bento > .col-10, .bento > .col-sm-10, .bento > .col-md-10, .bento > .col-lg-10, .bento > .col-xl-10, .bento > .col-xxl-10 { grid-column: span 5; }
+  .bento > .col-11, .bento > .col-sm-11, .bento > .col-md-11, .bento > .col-lg-11, .bento > .col-xl-11, .bento > .col-xxl-11,
+  .bento > .col-12, .bento > .col-sm-12, .bento > .col-md-12, .bento > .col-lg-12, .bento > .col-xl-12, .bento > .col-xxl-12 { grid-column: span 6; }
+  .grid-kpi { grid-template-columns: repeat(6, minmax(0, 1fr)); }
+  .grid-kpi > .kpi,
+  .grid-kpi > .stat-card,
+  .grid-kpi > .tile,
+  .grid-kpi > .card { grid-column: span 3; }
+  .grid-kpi > .c-4 { grid-column: span 2; }
+  .grid-kpi > .c-6,
+  .grid-kpi > .stat-card--wide,
+  .grid-kpi > .kpi--wide { grid-column: span 3; }
+  .grid-kpi > .c-12 { grid-column: span 6; }
+  .r-2, .r-3 { grid-row: auto; }
+}
+
+@container main (max-width: 40rem) {
+  .bento,
+  .grid-kpi { grid-template-columns: minmax(0, 1fr); }
+  .bento > *,
+  .bento > [class*="col-"],
+  .bento > .c-1, .bento > .c-2, .bento > .c-3, .bento > .c-4, .bento > .c-5, .bento > .c-6, .bento > .c-7, .bento > .c-8, .bento > .c-9, .bento > .c-10, .bento > .c-11, .bento > .c-12,
+  .bento > .c-full { grid-column: 1 / -1; }
+  .grid-kpi > .kpi,
+  .grid-kpi > .stat-card,
+  .grid-kpi > .tile,
+  .grid-kpi > .card,
+  .grid-kpi > .c-4,
+  .grid-kpi > .c-6,
+  .grid-kpi > .c-12,
+  .grid-kpi > .stat-card--wide,
+  .grid-kpi > .kpi--wide { grid-column: 1 / -1; }
+  .bento:has(> :nth-child(5):last-child) > .c-3:nth-child(-n+2),
+  .bento:has(> :nth-child(5):last-child) > .c-3:nth-child(n+3) { grid-column: 1 / -1; }
+  .bento > .tile--hero,
+  .bento > .tile--ink,
+  .bento > .tile--accent { padding: 1.25rem; }
+}
+

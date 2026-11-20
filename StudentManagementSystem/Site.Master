@@ -1,0 +1,265 @@
+<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.master.cs" Inherits="StudentManagementSystem.SiteMaster" %>
+<!DOCTYPE html>
+<html lang="en" data-theme="<%= ThemeAttr %>" data-theme-pref="<%= ThemePref %>" data-font="<%= FontAttr %>" data-motion="<%= MotionAttr %>" data-contrast="<%= ContrastAttr %>" data-zoom="<%= ZoomAttr %>" data-build="<%= BuildStamp %>" data-exam="<%= ExamMode ? "1" : "0" %>" class="<%= SidebarClass %>">
+<head runat="server">
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta name="robots" content="noindex"/>
+    <meta name="theme-color" content="<%= ThemeAttr == "dark" ? "#0E0E10" : ThemeAttr == "eye" ? "#EFE8D2" : "#F4F3EF" %>"/>
+    <link rel="icon" href="/Content/icons/favicon.svg" type="image/svg+xml"/>
+    <script>(function(){try{var r=document.documentElement;function c(n){var m=document.cookie.match(new RegExp("(?:^|; )"+n+"=([^;]*)"));return m?decodeURIComponent(m[1]):"";}var t=c("sms_theme");if(!t){try{var s=JSON.parse(localStorage.getItem("sms.appearance")||"{}");t=s.theme||"";}catch(e){}}if(t==="light"||t==="dark"||t==="eye"){r.setAttribute("data-theme",t);r.setAttribute("data-theme-pref",t);}var z=c("sms_zoom");if(z){r.setAttribute("data-zoom",z);}var f=c("sms_font");if(f){r.setAttribute("data-font",f);}var sb=c("sms_sidebar");if(sb==="1"){r.classList.add("sms-sidebar-collapsed");}}catch(e){}})();</script>
+    <script>(function(){try{var c=document.cookie.match(/(?:^|; )sms_tz=([^;]*)/);if(!c){var tz=Intl.DateTimeFormat().resolvedOptions().timeZone;if(tz){var d=new Date();d.setTime(d.getTime()+365*24*60*60*1000);document.cookie="sms_tz="+encodeURIComponent(tz)+";expires="+d.toUTCString()+";path=/;SameSite=Lax";}}}catch(e){}})();</script>
+    <script>(function(){try{var r=document.documentElement;function ck(n){var m=document.cookie.match(new RegExp("(?:^|; )"+n+"=([^;]*)"));return m?decodeURIComponent(m[1]):"";}var raw=ck("sms_prefs");if(!raw){try{raw=localStorage.getItem("sms_prefs")||"";}catch(e){}}var p={};try{p=JSON.parse(raw||"{}")||{};}catch(e){p={};}if(p.theme&&/^(light|dark|eye|system)$/.test(p.theme)){var t=p.theme==="system"?(window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light"):p.theme;r.setAttribute("data-theme",t);r.setAttribute("data-theme-pref",p.theme);}var z=parseInt(p.zoom,10);if(z>=80&&z<=150){r.setAttribute("data-zoom",String(z));r.style.setProperty("--app-zoom",String(z/100));}var f=parseInt(p.textScale,10);if(f>=85&&f<=140){r.setAttribute("data-font",String(f));r.style.setProperty("--text-scale",String(f/100));}if(p.motion==="reduced"||p.motion==="full"){r.setAttribute("data-motion",p.motion);}if(p.density==="compact"||p.density==="comfortable"){r.setAttribute("data-density",p.density);}if(p.highContrast){r.setAttribute("data-contrast","high");}if(p.sidebarCollapsed){r.classList.add("sms-sidebar-collapsed");}}catch(e){}})();</script>
+    <title><asp:ContentPlaceHolder ID="TitleContent" runat="server">Student Management System</asp:ContentPlaceHolder></title>
+    <link rel="preload" as="font" type="font/woff2" href="/Content/fonts/inter-latin-standard-normal.woff2" crossorigin/>
+    <link rel="preload" as="font" type="font/woff2" href="/Content/fonts/jetbrains-mono-latin-wght-normal.woff2" crossorigin/>
+    <link href="/Content/vendor/bootstrap/bootstrap.min.css" rel="stylesheet"/>
+    <link href="/Content/css/fonts.css" rel="stylesheet"/>
+    <link href="/Content/css/tokens.css" rel="stylesheet"/>
+    <link href="/Content/css/base.css" rel="stylesheet"/>
+    <link href="/Content/css/components.css" rel="stylesheet"/>
+    <link href="/Content/css/layout.css" rel="stylesheet"/>
+    <link href="/Content/css/bento.css" rel="stylesheet"/>
+    <link href="/Content/css/patterns.css" rel="stylesheet"/>
+    <link href="/Content/css/pages/dashboard.css" rel="stylesheet"/>
+    <link href="/Content/css/pages/chat.css" rel="stylesheet"/>
+    <link href="/Content/css/pages/settings.css" rel="stylesheet"/>
+    <link href="/Content/css/pages/misc.css" rel="stylesheet"/>
+    <link href="/Content/css/pages/profiles.css" rel="stylesheet"/>
+    <link href="/Content/css/print.css" rel="stylesheet" media="print"/>
+    <script src="/Content/js/design.js" defer></script>
+    <script src="/Content/js/patterns.js" defer></script>
+    <asp:ContentPlaceHolder ID="HeadContent" runat="server"/>
+</head>
+<body class="sms-body module-<%= ModuleAttr %>" data-module="<%= ModuleAttr %>">
+<a class="skip-link" href="#mainContent">Skip to content</a>
+
+<div class="app-shell">
+    <aside class="app-sidebar" id="smsSidebar" aria-label="Primary navigation">
+        <a class="sidebar-brand" href="/Default.aspx" aria-label="Student Management System home">
+            <span class="brand-mark" aria-hidden="true">S</span>
+            <span class="sidebar-brand-copy">
+                <span class="sidebar-brand-name">SMS</span>
+                <span class="sidebar-brand-sub">Campus</span>
+            </span>
+        </a>
+
+        <div class="sidebar-profile">
+            <div class="sidebar-avatar" aria-hidden="true"><%= E(FirstLetter()) %></div>
+            <div class="sidebar-user">
+                <div class="sidebar-name"><%= E(CurrentUser.FullName) %></div>
+                <div class="sidebar-role"><%= E(CurrentUser.RoleName) %></div>
+            </div>
+        </div>
+
+        <div class="sidebar-search">
+            <svg class="ic" aria-hidden="true"><use href="/Content/icons/sprite.svg#i-search"></use></svg>
+            <input id="smsNavSearch" type="search" placeholder="Find a page" aria-label="Find a page in navigation" autocomplete="off"/>
+        </div>
+        <p class="sidebar-empty" id="smsNavEmpty" hidden>No matching pages.</p>
+
+        <nav class="sidebar-nav" aria-label="Sections">
+            <%= SidebarHtml %>
+        </nav>
+
+        <div class="sidebar-foot">
+            <a href="/Help/Index.aspx" class="btn-sms-ghost signout-link" title="Help and guides">
+                <svg class="ic"><use href="/Content/icons/sprite.svg#i-info"></use></svg><span>Help</span>
+            </a>
+            <a href="/Account/Logout.aspx" class="btn-sms-ghost signout-link">
+                <svg class="ic"><use href="/Content/icons/sprite.svg#i-box-arrow-right"></use></svg><span>Sign out</span>
+            </a>
+            <button class="sidebar-collapse" id="smsSidebarToggle" type="button" aria-pressed="<%= SidebarClass == "sms-sidebar-collapsed" ? "true" : "false" %>" aria-label="Collapse navigation" title="Collapse navigation">
+                <svg class="ic"><use href="/Content/icons/sprite.svg#i-panel-left-close"></use></svg>
+            </button>
+        </div>
+    </aside>
+
+    <div class="app-frame">
+        <header class="topbar">
+            <button class="topbar-menu" id="smsBurger" type="button" aria-label="Open navigation menu" aria-controls="smsSidebar" aria-expanded="false">
+                <svg class="ic"><use href="/Content/icons/sprite.svg#i-list"></use></svg>
+            </button>
+            <div class="topbar-crumbs">
+                <span class="topbar-title"><%= E(PageHeading()) %></span>
+                <span class="topbar-crumb">SMS / <%= E(CurrentUser.RoleName) %></span>
+            </div>
+            <form class="topbar-search" id="smsSearchForm" role="search">
+                <svg class="ic" aria-hidden="true"><use href="/Content/icons/sprite.svg#i-search"></use></svg>
+                <input id="smsGlobalSearch" type="search" placeholder="Search navigation" aria-label="Search navigation" autocomplete="off"/>
+            </form>
+            <div class="topbar-tools">
+                <%= PushButtonHtml %>
+                <div class="sms-themeseg" role="group" aria-label="Theme">
+                    <button class="sms-themeseg-btn<%= ThemePref == "light" ? " active" : "" %>" type="button" data-sms-theme="light" aria-pressed="<%= ThemePref == "light" ? "true" : "false" %>" title="Light theme">Light</button>
+                    <button class="sms-themeseg-btn<%= ThemePref == "dark" ? " active" : "" %>" type="button" data-sms-theme="dark" aria-pressed="<%= ThemePref == "dark" ? "true" : "false" %>" title="Dark theme">Dark</button>
+                    <button class="sms-themeseg-btn<%= ThemePref == "eye" ? " active" : "" %>" type="button" data-sms-theme="eye" aria-pressed="<%= ThemePref == "eye" ? "true" : "false" %>" title="Eye protection theme">Eye</button>
+                </div>
+                <div class="sms-fontctl" role="group" aria-label="Text size">
+                    <button class="sms-iconbtn" id="smsFontDown" type="button" aria-label="Decrease text size" title="Decrease text size">A&minus;</button>
+                    <button class="sms-iconbtn sms-font-reset" id="smsFontReset" type="button" aria-label="Reset text size" title="Reset text size">A</button>
+                    <button class="sms-iconbtn" id="smsFontUp" type="button" aria-label="Increase text size" title="Increase text size">A+</button>
+                </div>
+                <div class="sms-zoomctl" role="group" aria-label="Interface zoom">
+                    <button class="sms-iconbtn" id="smsZoomDown" type="button" aria-label="Zoom out" title="Zoom out">&minus;</button>
+                    <button class="zoom-value" id="smsZoomReset" type="button" aria-label="Reset interface zoom" title="Reset interface zoom">100%</button>
+                    <button class="sms-iconbtn" id="smsZoomUp" type="button" aria-label="Zoom in" title="Zoom in">+</button>
+                </div>
+                <button class="topbar-clock" id="smsClockBtn" type="button" title="Switch 12/24-hour clock" aria-label="Local time, switch clock format">
+                    <time id="smsClockTime" datetime="">--:--</time>
+                </button>
+                <div class="topbar-display-wrap" id="smsDisplayWrap">
+                    <button class="topbar-display-toggle" id="smsDisplayBtn" type="button" aria-expanded="false" aria-controls="smsDisplayPanel" title="Display settings">DISPLAY</button>
+                    <div class="topbar-display" id="smsDisplayPanel">
+                        <div class="sms-themeseg topbar-display-themes" role="group" aria-label="Theme">
+                            <button class="sms-themeseg-btn<%= ThemePref == "light" ? " active" : "" %>" type="button" data-sms-theme="light" aria-pressed="<%= ThemePref == "light" ? "true" : "false" %>" title="Light theme">Light</button>
+                            <button class="sms-themeseg-btn<%= ThemePref == "dark" ? " active" : "" %>" type="button" data-sms-theme="dark" aria-pressed="<%= ThemePref == "dark" ? "true" : "false" %>" title="Dark theme">Dark</button>
+                            <button class="sms-themeseg-btn<%= ThemePref == "eye" ? " active" : "" %>" type="button" data-sms-theme="eye" aria-pressed="<%= ThemePref == "eye" ? "true" : "false" %>" title="Eye protection theme">Eye</button>
+                        </div>
+                        <div class="sms-fontctl" role="group" aria-label="Text size">
+                            <button class="sms-iconbtn" id="smsFontDownDD" type="button" aria-label="Decrease text size" title="Decrease text size">A&minus;</button>
+                            <button class="sms-iconbtn sms-font-reset" id="smsFontResetDD" type="button" aria-label="Reset text size" title="Reset text size">A</button>
+                            <button class="sms-iconbtn" id="smsFontUpDD" type="button" aria-label="Increase text size" title="Increase text size">A+</button>
+                        </div>
+                        <div class="sms-zoomctl" role="group" aria-label="Interface zoom">
+                            <button class="sms-iconbtn" id="smsZoomDownDD" type="button" aria-label="Zoom out" title="Zoom out">&minus;</button>
+                            <button class="zoom-value" id="smsZoomResetDD" type="button" aria-label="Reset interface zoom" title="Reset interface zoom">100%</button>
+                            <button class="sms-iconbtn" id="smsZoomUpDD" type="button" aria-label="Zoom in" title="Zoom in">+</button>
+                        </div>
+                        <div class="topbar-display-toggles">
+                            <button class="sms-prefbtn" type="button" data-pref-action="motion-toggle" aria-pressed="false" title="Toggle reduced motion">Motion: full</button>
+                            <button class="sms-prefbtn" type="button" data-pref-action="density-toggle" aria-pressed="false" title="Toggle compact spacing">Density: comfortable</button>
+                        </div>
+                        <a class="topbar-display-link" href="/Account/Settings.aspx">All display settings</a>
+                    </div>
+                </div>
+                <a class="sms-iconbtn" href="/Account/Settings.aspx" title="Settings" aria-label="Settings">
+                    <svg class="ic"><use href="/Content/icons/sprite.svg#i-gear"></use></svg>
+                </a>
+                <div class="tool-pop">
+                    <button class="sm-bell" id="smsBell" type="button" aria-expanded="false" aria-controls="smsNotifPanel" aria-label="Notifications" title="Notifications">
+                        <svg class="ic"><use href="/Content/icons/sprite.svg#i-bell"></use></svg><span class="sm-badge d-none" id="smsBadge">0</span>
+                    </button>
+                    <div class="sms-notif-panel" id="smsNotifPanel" hidden role="dialog" aria-label="Recent notifications">
+                        <div class="snp-head">
+                            <h2 class="snp-title">Notifications</h2>
+                            <span class="snp-count" id="smsNotifCount">0 unread</span>
+                            <div class="snp-actions">
+                                <button type="button" class="snp-linkbtn" id="smsMarkAll">Mark all read</button>
+                                <button type="button" class="snp-linkbtn" id="smsNotifClose" aria-label="Close notifications">&times;</button>
+                            </div>
+                        </div>
+                        <ul class="snp-list" id="smsNotifList">
+                            <li class="snp-empty">Loading...</li>
+                        </ul>
+                        <div class="snp-foot"><a class="snp-linkbtn" href="<%= NotifCenterUrl %>">View all notifications</a></div>
+                    </div>
+                </div>
+                <a class="topbar-avatar" href="/Account/Settings.aspx" title="Account settings" aria-label="Account settings"><%= E(FirstLetter()) %></a>
+            </div>
+        </header>
+
+        <div class="notif-ticker" id="smsTicker" hidden role="region" aria-label="Notifications ticker">
+            <span class="notif-ticker-label" id="smsTickerLabel">Unread 0</span>
+            <div class="notif-ticker-viewport">
+                <div class="notif-ticker-track" id="smsTickerTrack"></div>
+            </div>
+            <span class="notif-ticker-controls">
+                <button class="notif-ticker-btn" id="smsTickerPause" type="button" aria-label="Pause ticker" title="Pause">&#10074;&#10074;</button>
+                <button class="notif-ticker-btn" id="smsTickerMin" type="button" aria-label="Minimise ticker" title="Minimise">&#8722;</button>
+                <a class="notif-ticker-btn" href="/Account/Settings.aspx#notifications" aria-label="Ticker settings" title="Ticker settings">&#9881;</a>
+            </span>
+            <span class="visually-hidden" id="smsTickerLive" aria-live="polite"></span>
+        </div>
+
+        <%= TimezoneNoticeHtml %>
+
+        <main class="app-content" id="mainContent" tabindex="-1">
+            <% if (ShowProfileGate) { %><%= ProfileGateHtml %><% } %>
+            <div class="<%= ShowProfileGate ? "sms-gated" : "" %>">
+            <asp:ContentPlaceHolder ID="MainContent" runat="server"/>
+            </div>
+            <footer class="app-footer">
+                <span class="footer-made">Made with <span class="footer-heart" aria-hidden="true">&hearts;</span> by <strong>QuantumGlitch404</strong></span>
+            </footer>
+        </main>
+    </div>
+</div>
+<div class="sidebar-scrim" id="smsScrim" aria-hidden="true"></div>
+
+<dialog class="ticker-dialog" id="smsTickerDialog" aria-labelledby="smsTickerDialogTitle">
+    <div class="ticker-dialog-head">
+        <span class="ticker-dialog-kicker">Notification</span>
+        <button type="button" class="ticker-dialog-close" id="smsTickerDialogClose" aria-label="Close notification preview">&times;</button>
+    </div>
+    <h2 class="ticker-dialog-title" id="smsTickerDialogTitle"></h2>
+    <p class="ticker-dialog-body" id="smsTickerDialogBody"></p>
+    <p class="ticker-dialog-meta" id="smsTickerDialogMeta"></p>
+    <div class="ticker-dialog-actions">
+        <a class="btn btn-primary btn-sm" id="smsTickerDialogOpen" href="#">Open</a>
+        <button type="button" class="btn btn-outline-secondary btn-sm" id="smsTickerDialogRead">Mark read</button>
+        <span class="ticker-dialog-snooze">
+            <button type="button" class="btn btn-outline-secondary btn-sm" data-ticker-snooze="15">Snooze 15m</button>
+            <button type="button" class="btn btn-outline-secondary btn-sm" data-ticker-snooze="60">1h</button>
+            <button type="button" class="btn btn-outline-secondary btn-sm" data-ticker-snooze="1440">Tomorrow</button>
+        </span>
+    </div>
+</dialog>
+
+<dialog class="cmd-palette" id="smsCmd" aria-label="Find anything">
+    <div class="cmd-head">
+        <svg class="ic" aria-hidden="true"><use href="/Content/icons/sprite.svg#i-search"></use></svg>
+        <input id="smsCmdInput" type="search" placeholder="Search pages, actions and settings..." aria-label="Find anything" autocomplete="off"/>
+        <kbd>Esc</kbd>
+    </div>
+    <ul class="cmd-results" id="smsCmdResults" role="listbox"></ul>
+    <div class="cmd-foot"><span>Type to filter</span><span>Enter to open &middot; <kbd>?</kbd> shortcuts</span></div>
+</dialog>
+
+<div class="sms-chat-panel d-none" id="smsChat" data-csrf="<%= CsrfToken %>" data-page="<%= E(Request.Path) %>">
+    <div class="smc-head">
+        <span class="smc-title"><svg class="ic"><use href="/Content/icons/sprite.svg#i-stars"></use></svg> SMS Assistant <span class="smc-live"><span class="ai-dot" id="smsChatDot"></span><span id="smsChatStatus">local</span></span></span>
+        <span class="smc-head-actions">
+            <a href="/Chatbot/Index.aspx" class="smc-full" title="Open the full assistant with saved conversations" aria-label="Open full assistant"><svg class="ic"><use href="/Content/icons/sprite.svg#i-arrows-angle-expand"></use></svg></a>
+            <button id="smsChatClose" class="sms-userclose" type="button" aria-label="Close assistant">&times;</button>
+        </span>
+    </div>
+    <div class="smc-msgs" id="smsChatMsgs">
+        <div class="smc-welcome">
+            <strong>This page is my context.</strong>
+            <p>Ask about what you see, your own records, or how to use the system. Answers run on the local model on this computer.</p>
+        </div>
+        <div class="smc-suggests">
+            <button type="button" data-suggest="Explain this page and what I can do here.">Explain this page</button>
+            <button type="button" data-suggest="Where can I find my notifications and settings?">Find notifications</button>
+            <button type="button" data-suggest="What does my dashboard summary mean?">Explain my summary</button>
+        </div>
+    </div>
+    <div class="smc-input"><input id="smsChatInput" maxlength="2000" placeholder="Ask about this page or your records..." aria-label="Ask the assistant"/><button id="smsChatSend" type="button">Send</button></div>
+</div>
+<button class="sms-chat-fab" id="smsChatFab" type="button" title="Ask the offline assistant" aria-label="Open the assistant">
+    <svg class="ic"><use href="/Content/icons/sprite.svg#i-stars"></use></svg>
+</button>
+
+<script src="/Content/vendor/jquery/jquery-3.7.1.min.js"></script>
+<script src="/Content/vendor/bootstrap/bootstrap.bundle.min.js"></script>
+<script>window.SMS_PUSH = <%= PushConfigJson %>;
+window.SMS_TICKER = <%= TickerConfigJson %>;
+window.SMS_NOTIF = { csrf: "<%= CsrfToken %>" };</script>
+    <script src="/Content/js/appearance.js"></script>
+    <script src="/Content/js/prefs.js"></script>
+<script src="/Content/js/validation.js"></script>
+<script src="/Content/js/site.js"></script>
+<script src="/Content/js/clock.js"></script>
+<script src="/Content/js/notifications.js"></script>
+<script src="/Content/js/ticker.js"></script>
+<script src="/Content/js/command.js"></script>
+<script src="/Content/js/ai-quick.js"></script>
+<script src="/Content/js/push.js"></script>
+<script src="/Content/js/profile.js"></script>
+<asp:ContentPlaceHolder ID="ScriptContent" runat="server"/>
+</body>
+</html>
+
+
+
